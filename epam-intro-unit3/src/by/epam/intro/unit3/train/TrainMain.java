@@ -7,35 +7,37 @@ import java.io.InputStreamReader;
 public class TrainMain {
 	public static void main(String[] args) throws IOException {
 		
-		TrainLogic trainLogic = new TrainLogic();
+		int number = 5;
+		Depo depo = new Depo(number);
+		
+		DepoLogic depoLog = new DepoLogic();
 
-		Train[] tr = new Train[5];
+		Train[] tr = new Train[number];
 		tr[0] = new Train("Minsk");
 		tr[1] = new Train("Gomel");
 		tr[2] = new Train("Brest"); // все остальные данные генерируются в конструкторе
 		tr[3] = new Train("Minsk");
 		tr[4] = new Train("Vitebsk");
+		
+		
+		for(int i=0; i<tr.length;i++) {
+			depo.addTrain(tr[i]);
+		}
 
 		System.out.println("------------Train's information------------");
+		printInfo(depo.getTrains());
 		
-		for (int i = 0; i < tr.length; i++) {
-			System.out.println(tr[i]);
-		}
 
 		System.out.println("--------------- Sort by numbers -------------");
 		
-		trainLogic.sortByNum(tr);
-		for (int i = 0; i < tr.length; i++) {
-			System.out.println(tr[i]);
-		}
+		depoLog.sortByNum(depo);
+		printInfo(depo.getTrains());
 		
 		
 		 System.out.println("--------------- Sort by destination -------------");
 		
-		 trainLogic.sortByDestination(tr); 
-		  for (int i = 0; i <tr.length; i++) {
-			  System.out.println(tr[i]);
-		  }
+		 depoLog.sortByDestination(depo); 
+		  printInfo(depo.getTrains());
 		
 
 		System.out.println("Insert train's number to get the information --> ");
@@ -45,11 +47,19 @@ public class TrainMain {
 		String str = reader.readLine();
 		int num = Integer.parseInt(str);
 
-		if (trainLogic.infoByNum(tr, num) != null) {
-			System.out.println(trainLogic.infoByNum(tr, num));
+		if (depoLog.takeTrainByNum(depo, num) != null) {
+			System.out.println(depoLog.takeTrainByNum(depo, num) );
 		} else {
 			System.out.println("Train doesn't exist!");
 		}
 
+	}
+	
+	public static void printInfo(Train[] trains) {
+		for (Train tr : trains) {
+			if (tr!=null)
+				System.out.println(tr);
+			
+		}
 	}
 }

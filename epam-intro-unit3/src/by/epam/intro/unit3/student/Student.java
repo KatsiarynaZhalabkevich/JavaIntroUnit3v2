@@ -22,7 +22,7 @@ public class Student {
 
 			while (marks[i] < 4 || marks[i] > 10) {
 
-				marks[i] =8 + random.nextInt(11);
+				marks[i] = 8 + random.nextInt(11);
 			}
 		}
 	}
@@ -63,9 +63,55 @@ public class Student {
 		return marks;
 	}
 
+	public void setOneMark(int index, int mark) {
+		if (index >= 0 && index < marks.length) {
+			marks[index] = mark;
+		}
+	}
+
+	public int getOneMark(int index) {
+		if (index >= 0 && index < marks.length) {
+			return marks[index];
+		} else
+			return -1;
+	}
+
 	@Override
 	public String toString() {
-		return "Student's information:\n name: " + getName() + ", group " + getGroupNum() + ",\n marks " + Arrays.toString(getMarks()) + "\n";
+		return "Student's information:\n name: " + getName() + ", group " + getGroupNum() + ",\n marks "
+				+ Arrays.toString(getMarks()) + "\n";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + groupNum;
+		result = prime * result + Arrays.hashCode(marks);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (groupNum != other.groupNum)
+			return false;
+		if (!Arrays.equals(marks, other.marks))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
 
 }

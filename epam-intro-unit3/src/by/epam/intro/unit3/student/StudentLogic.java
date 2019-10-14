@@ -1,9 +1,6 @@
 package by.epam.intro.unit3.student;
 
 public class StudentLogic {
-	
-	//т.к. мы работаем с каждым студентом отдельно, то список студентов не создается.
-	//если бы надо было подсчитать кол-во хороших / плохих, средний бал группы и тд, то нужен был бы список
 
 	public boolean isGoodStudent(Student st) {
 

@@ -4,35 +4,34 @@ public class StudentMain {
 
 	public static void main(String[] args) {
 
-		StudentLogic studentLogic = new StudentLogic();
+		int number = 10;
+		Group group = new Group(number);
+		GroupService grServ = new GroupService();
 
 		String[] names = { "Ivanov I.I.", "Petrov P.P.", "Novikov N.N.", "Brawn B.B.", "Smith S.M.", "Small P.D.",
 				"Pitt B.T.", "Hud R.B.", "White P.N.", "Black J.L." };
-		Student[] st = new Student[10];
 
-		for (int i = 0; i < names.length; i++) {
-			st[i] = new Student(names[i]);
-
+		for (int i = 0; i < number; i++) {
+			group.addStudent(new Student(names[i])); // создали студентов и поместили в группу
 		}
-		for (int i = 0; i < names.length; i++) {
 
-			System.out.println(st[i]);
+		Student[] students = group.getStudents();
+		System.out.println("All student's information:");
+		printInfo(students);
 
-		}
+		Student[] goodStudents;
+		goodStudents = grServ.takeGoodStudents(group);
 
 		System.out.println("Good students: ");
-		int count = 0;
-		for (int i = 0; i < st.length; i++) {
+		printInfo(goodStudents);
 
-			if (studentLogic.isGoodStudent(st[i])) {
-				System.out.println(st[i]);
-				count++;
-			}
-		}
-		if (count == 0) {
-			System.out.println("Sorry, we don't have good students!");
-		}
+	}
 
+	public static void printInfo(Student[] st) {
+		for (Student student : st) {
+			if (student != null)
+				System.out.println(student);
+		}
 	}
 
 }
