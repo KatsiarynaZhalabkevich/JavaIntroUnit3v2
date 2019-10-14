@@ -20,11 +20,11 @@ public class DepoLogic {
 
 			}
 		}
-		//return tr;
+		
 	}
 
-// проверить без возврата значений должно срабоать
-	public Train[] sortByDestination(Depo depo) {
+
+	public void sortByDestination(Depo depo) {
 		Train train;
 		Train[] tr = depo.getTrains();
 		for (int j = 0; j < tr.length; j++) {
@@ -40,7 +40,7 @@ public class DepoLogic {
 				}
 			}
 		}
-		return tr;
+		
 
 	}
 
